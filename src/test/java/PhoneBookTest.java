@@ -25,6 +25,7 @@ public class PhoneBookTest {
         );
     }
 
+    //Опять передклываю тест, потому что ранее без первого теста он бы не проходил
     @ParameterizedTest
     @MethodSource
     void findByNumber_Test(String number, String expected) {
@@ -32,10 +33,16 @@ public class PhoneBookTest {
     }
 
     private static Stream<Arguments> findByNumber_Test() {
+        if(phoneBook.isEmpty()){
+            phoneBook.add("Alex", "+3754764180");
+            phoneBook.add("Jane", "+854213054");
+            phoneBook.add("Ricardo", "88005553535");
+        }
         return Stream.of(
                 Arguments.of("+3754764180", "Alex"),
                 Arguments.of("+854213054", "Jane"),
-                Arguments.of("88005553535", "Ricardo")
+                Arguments.of("88005553535", "Ricardo"),
+                Arguments.of("547", null)
         );
     }
 }
