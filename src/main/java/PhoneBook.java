@@ -21,7 +21,5 @@ public class PhoneBook {
         } else return null;
 
     }
-    public boolean isEmpty(){
-        return phoneBook.isEmpty();
-    }
+
 }

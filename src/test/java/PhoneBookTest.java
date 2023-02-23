@@ -1,3 +1,4 @@
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -10,6 +11,14 @@ import static org.hamcrest.core.IsEqual.equalTo;
 public class PhoneBookTest {
     static PhoneBook phoneBook = new PhoneBook();
 
+    //Опять переделываю тест, потому что ранее без первого теста не проходили бы последующие
+    @BeforeAll
+    static void start() {
+        phoneBook.add("Dan", "+3756781230");
+        phoneBook.add("Cole", "+89049844126");
+        phoneBook.add("Bill", "89501946668");
+    }
+
     //  Немного изменил первый тест. Думаю, ничего критичного. Он проходил до изменения, проходит и после
     @ParameterizedTest
     @MethodSource
@@ -19,30 +28,25 @@ public class PhoneBookTest {
 
     private static Stream<Arguments> add_Test() {
         return Stream.of(
-                Arguments.of("Alex", "+3754764180", 1),
-                Arguments.of("Jane", "+854213054", 2),
-                Arguments.of("Ricardo", "88005553535", 3)
+                Arguments.of("Alex", "+3754764180", 4),
+                Arguments.of("Jane", "+854213054", 5),
+                Arguments.of("Ricardo", "88005553535", 6)
         );
     }
 
-    //Опять передклываю тест, потому что ранее без первого теста он бы не проходил
+
     @ParameterizedTest
     @MethodSource
-    void findByNumber_Test(String number, String expected) {
+    void findByNumber_Test(String expected, String number) {
         assertThat(phoneBook.findByNumber(number), equalTo(expected));
     }
 
     private static Stream<Arguments> findByNumber_Test() {
-        if(phoneBook.isEmpty()){
-            phoneBook.add("Alex", "+3754764180");
-            phoneBook.add("Jane", "+854213054");
-            phoneBook.add("Ricardo", "88005553535");
-        }
         return Stream.of(
-                Arguments.of("+3754764180", "Alex"),
-                Arguments.of("+854213054", "Jane"),
-                Arguments.of("88005553535", "Ricardo"),
-                Arguments.of("547", null)
+                Arguments.of("Dan", "+3756781230"),
+                Arguments.of("Cole", "+89049844126"),
+                Arguments.of("Bill", "89501946668"),
+                Arguments.of(null, "547")
         );
     }
 }
