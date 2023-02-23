@@ -49,5 +49,20 @@ public class PhoneBookTest {
                 Arguments.of(null, "547")
         );
     }
+
+    @ParameterizedTest
+    @MethodSource
+    void findByName_Test(String name, String expected) {
+        assertThat(phoneBook.findByName(name), equalTo(expected));
+    }
+
+    private static Stream<Arguments> findByName_Test() {
+        return Stream.of(
+                Arguments.of("Dan", "+3756781230"),
+                Arguments.of("Cole", "+89049844126"),
+                Arguments.of("Bill", "89501946668"),
+                Arguments.of(null, "547")
+        );
+    }
 }
 
