@@ -1,8 +1,7 @@
 import java.util.*;
 
 public class PhoneBook {
-    private static final Map<String, String> phoneBook = new HashMap<>();
-
+    private static final SortedMap<String, String> phoneBook = new TreeMap<>();
 
 
     public int add(String name, String phoneNumber) {
@@ -30,8 +29,11 @@ public class PhoneBook {
             return entryList.get(0).getValue();
         } else return null;
     }
-public static Set<String> printAllNames(){
-        return null;
-}
+
+    public static Set<String> printAllNames() {
+        Set<String> names = phoneBook.keySet();
+        System.out.println(names);
+        return names;
+    }
 
 }
