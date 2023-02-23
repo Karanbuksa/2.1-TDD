@@ -61,7 +61,7 @@ public class PhoneBookTest {
                 Arguments.of("Dan", "+3756781230"),
                 Arguments.of("Cole", "+89049844126"),
                 Arguments.of("Bill", "89501946668"),
-                Arguments.of(null, "547")
+                Arguments.of("Sam", null)
         );
     }
 }

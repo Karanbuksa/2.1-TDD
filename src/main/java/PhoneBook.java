@@ -22,6 +22,12 @@ public class PhoneBook {
 
     }
 public String findByName(String name){
-        return null;
+    List<Map.Entry<String, String>> entryList = phoneBook.entrySet()
+            .stream()
+            .filter(x -> Objects.equals(x.getKey(), name))
+            .toList();
+    if (!entryList.isEmpty()) {
+        return entryList.get(0).getValue();
+    } else return null;
     }
 }
